@@ -1,12 +1,55 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, FlatList, ListRenderItem } from "react-native";
+import React, { SetStateAction } from "react";
+import { Employee } from "../type";
 
-const SearchResults = () => {
+type Props = {
+  data: Employee[];
+  input:string;
+  setInput:React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchResults = ({ data, input, setInput }:Props) => {
   return (
-    <View>
-      <Text>SearchResults</Text>
-    </View>
-  )
-}
+    <View style={{ padding: 10 }}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => {
+          if (item?.employeeName.toLowerCase().includes(input.toLowerCase())) {
+            return (
+              <View
+                style={{ marginVertical: 10, gap: 10, flexDirection: "row" }}
+              >
+                <View
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 8,
+                    padding: 10,
+                    backgroundColor: "#4b6cb7",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{color:"white",fontSize:16}}>{item?.employeeName?.charAt(0)}</Text>
+                </View>
 
-export default SearchResults
+                <View>
+                  <Text style={{fontSize:16,fontWeight:"bold"}}>{item?.employeeName}</Text>
+                  <Text style={{marginTop:5,color:"gray"}}>
+                    {item?.designation} ({item?.employeeId})
+                  </Text>
+                </View>
+              </View>
+            );
+          }else{
+            return null;
+          }
+        }}
+      />
+    </View>
+  );
+};
+
+export default SearchResults;
+
+const styles = StyleSheet.create({});
