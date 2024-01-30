@@ -34,7 +34,7 @@ const adddetails = () => {
         address: address,
       };
       try{
-        const result = await addEmployee({employeeData});
+        const result = await addEmployee(employeeData);
         Alert.alert(
             "Registration Successful",
             "You have been registered successfully"

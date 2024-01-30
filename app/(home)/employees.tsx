@@ -5,25 +5,18 @@ import { Employee } from '../../type';
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import SearchResults from "../../components/SearchResults";
 
 const employees = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [input, setInput] = useState("");
     const router = useRouter();
     const {data=[], isSuccess, isError, isLoading} = useGetEmployeesQuery();
-    setEmployees(data)
     console.log(data);
 
-
-  //   useEffect((isError: any) => {
-  //     if (isError) {
-  //         return (
-  //             <View>
-  //                 <Text>{isError}</Text>
-  //             </View>
-  //         )
-  //     }
-  // }, [data])
+    useEffect(()=>{
+      setEmployees(data)
+    },[]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -76,7 +69,7 @@ const employees = () => {
         </Pressable>
       </View>
 
-      {/* {employees.length > 0 ? (
+      {employees.length > 0 ? (
         <SearchResults data={employees} input={input} setInput={setInput} />
       ) : (
         <View
@@ -93,8 +86,9 @@ const employees = () => {
             />
           </Pressable>
         </View>
-      )} */}
+      )}
     </View>
+   
   );
 };
 

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Employee } from '../type';
 export const employeeApi = createApi({
     reducerPath: 'employeeApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.101:8080' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.0.219:8080' }),
     endpoints: (builder) => ({
         addEmployee: builder.mutation({
             query:(body)=>({
